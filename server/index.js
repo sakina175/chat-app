@@ -3,10 +3,21 @@ const cors= require("cors")
 const mongoose=require("mongoose")
 
 const app=express();
-require('dotenv').config();
+require("dotenv").config();
 
 app.use(cors())
 app.use(express.json())
+
+mongoose.set("strictQuery", false);
+mongoose.connect(process.env.MONGO_URL,{
+    useNewUrlParser:true,
+    useUnifiedTopology:true
+})
+.then(()=>{
+    console.log('db connected');
+}).catch((err)=>{
+    console.log(err.message);
+})
 
 mongoose.connect(process.env.MONGO_URL,{
     useNewUrlParser:true,
