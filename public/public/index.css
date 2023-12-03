@@ -1,0 +1,16 @@
+@import url();
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body,
+button,
+input{
+    font-family: 'Courier New', Courier, monospace;
+}
+body{
+    max-height: 100vh;
+    max-width: 100wh;
+    overflow: hidden;
+}
