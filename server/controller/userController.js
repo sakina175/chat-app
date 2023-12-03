@@ -6,11 +6,11 @@ const register = async (req, res,next) => {
     const {username,userEmail,password}=req.body;
     const usernameCheck=await User.findOne({username});
     if(usernameCheck){
-      return res.json({msg:"User Name already exist"})
+      return res.json({status:false,msg:"User Name already exist"})
     }
     const userEmailCheck=await User.findOne({userEmail});
     if(userEmailCheck){
-      return res.json({msg:"User email already exist"})
+      return res.json({status:false,msg:"User email already exist"})
     }
     const hashPass=await bcrypt.hash(password,10);
     const user =await User.create({
@@ -30,15 +30,16 @@ const register = async (req, res,next) => {
 const login = async (req, res,next) => {
   try {
     const {username,password}=req.body;
-    const usernameCheck=await User.findOne({username});
-    if(usernameCheck){
-      return res.json({msg:"User Name not exist"})
+    const user=await User.findOne({username});
+    
+    if(!user){
+      return res.json({status:false,msg:"User Name not exist"})
     }
 
-    const hashPass=await bcrypt.hash(password,10);
-    const userPasswordCheck=await User.findOne({username,hashPass});
-    if(userPasswordCheck){
-      return res.json({msg:"Incorrect Password"})
+    const userPasswordCheck=await bcrypt.compare(password,user.password);
+
+    if(!userPasswordCheck){
+      return res.json({status:false,msg:"Incorrect Password"})
     }
     
     delete user.password;

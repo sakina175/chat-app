@@ -1,32 +1,33 @@
 import React,{useState} from 'react';
 import Logo from "../assets/images.png";
+import {useNavigate} from "react-router-dom";
 // import {ToastContainer,toast} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios'
 import { loginRoute } from "../utils/APIconn.js";
 
 const Register = () => {
+  const navigate=useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
  
   const handleSubmit = async (event) => {
   event.preventDefault();
   console.log('Before Axios: ', username, password);
-
   try {
     const { data } = await axios.post(loginRoute, {
       username,
       password,
     });
     if (data.status===true) {
-      localStorage.setItem("userName",data.user.username);
-
+      localStorage.setItem("userName",data.username);
+      navigate('/chat');
     }
     if (data.status===false) {
-      alert(data.msg);    }
-    console.log('After Axios - Data:', data);
+      alert(data.msg);    
+    }
   } catch (error) {
-    console.error('Error during registration:', error);
+    console.error('Error during login:', error);
   }
 
 };

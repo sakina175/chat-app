@@ -1,12 +1,13 @@
 import React,{useState} from 'react';
 import Logo from "../assets/images.png";
-import {Link} from "react-router-dom";
+import {Link,useNavigate} from "react-router-dom";
 // import {ToastContainer,toast} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios'
 import { registerRoute } from "../utils/APIconn.js";
 
 const Register = () => {
+  const navigate=useNavigate();
   const [username, setUsername] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,28 +25,15 @@ const Register = () => {
     });
     if (data.status===true) {
       localStorage.setItem("userName",data.user.username);
-
+      navigate('/login')
     }
     if (data.status===false) {
       alert(data.msg);    }
-    console.log('After Axios - Data:', data);
-  } catch (error) {
-    console.error('Error during registration:', error);
-  }
-
+    } catch (error) {
+      console.error('Error during registration:', error);
+    }
 };
-// const handleValidation=(event)=>{
-  //   const {password,confirmPassword}=values;
-  //   if(password!==confirmPassword){
-  //     toast.error("not match",{
-  //       position:'bottom-right',
-  //       autoClose:8000,
-  //       pauseOnHover:true,
-  //       draggable:true,
-  //       theme:"dark",
-  //     });
-    // }
-  // }
+
   return (
   <>
   <div class="d-flex justify-content-center">
