@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 // import {ToastContainer,toast} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios'
-import { loginRoute } from "../utils/APIconn.js";
+import { loginRoute } from "../utils/APIconn.jsx";
 
 const Register = () => {
   const navigate=useNavigate();
@@ -20,7 +20,7 @@ const Register = () => {
       password,
     });
     if (data.status===true) {
-      localStorage.setItem("userName",data.username);
+      localStorage.setItem("chat-app-user", JSON.stringify(data.user)); // Convert to JSON string
       navigate('/chat');
     }
     if (data.status===false) {

@@ -1,3 +1,4 @@
+/* gernel part */
 .App {
   text-align: center;
 }
@@ -36,3 +37,56 @@
     transform: rotate(360deg);
   }
 }
+
+/* set avatar part */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.title-container {
+  margin-bottom: 20px;
+}
+
+.avatars {
+  display: flex;
+  justify-content: center;
+}
+
+.avatar {
+  margin: 0 10px; /* Adjust the margin as needed */
+}
+
+.img-avatar {
+  width: 100px; /* Adjust the width as needed */
+  height: 100px; /* Adjust the height as needed */
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.img-avatar:hover {
+  border-color: #007bff; /* Add your desired hover border color */
+}
+
+.selected {
+  border:0.4rem solid #007bff
+}
+
+.sub-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff; /* Add your button background color */
+  color: #fff; /* Add your button text color */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sub-btn:hover {
+  background-color: #0056b3; /* Add your button hover background color */
+}
+
