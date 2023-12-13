@@ -66,8 +66,25 @@ const setAvatar = async (req, res,next) => {
   
 };
 
+const allusers = async (req, res,next) => {
+  try {
+    const users=await User.find({_id:{$ne:rerq.params.id}}).select([
+      "userEmail",
+      "username",
+      "avatarImage",
+      "_id"
+    ]);
+
+    return res.json({status:true,users})
+    } catch (error) {
+      next(error)
+    }
+  
+};
+
 module.exports = {
   register,
   login,
-  setAvatar
+  setAvatar,
+  allusers
 };
